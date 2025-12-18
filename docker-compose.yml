@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "8000:8000"
+    environment:
+      DB_HOST: innovation.c3m2emiiu9qh.eu-west-1.rds.amazonaws.com
+      DB_PORT: 3306
+      DB_NAME: capstone
+      DB_USER: admin
+      DB_PASSWORD: "EEbY2M:M1d(TId_ba.OB)65zqo(C"
+    # Remove depends_on for postgres, not used
+    # depends_on:
+    #   - postgres
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "8081:80"
+    depends_on:
+      - backend
+
+# Remove postgres service if connecting to RDS, or keep only for local dev
+# volumes:
+#   postgres_data:
