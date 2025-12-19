@@ -1,20 +1,27 @@
 FROM nginx:alpine
 
+# Create non-root user
 RUN addgroup -g 1001 -S appuser && \
     adduser -u 1001 -S appuser -G appuser
 
+# Remove default nginx config
+RUN rm /etc/nginx/conf.d/default.conf
+
+# Copy correct nginx configs
 COPY nginx.conf /etc/nginx/nginx.conf
+COPY default.conf /etc/nginx/conf.d/default.conf
+
+# Copy frontend files
 COPY public/ /usr/share/nginx/html/
 
-RUN chown -R appuser:appuser /usr/share/nginx/html && \
-    chown -R appuser:appuser /var/cache/nginx && \
-    chown -R appuser:appuser /var/log/nginx && \
+# Fix permissions
+RUN chown -R appuser:appuser /usr/share/nginx/html \
+    /var/cache/nginx \
+    /var/log/nginx && \
     touch /var/run/nginx.pid && \
     chown -R appuser:appuser /var/run/nginx.pid
 
 USER appuser
-
-ENV BACKEND_URL=http://localhost:8000
 
 EXPOSE 80
 
