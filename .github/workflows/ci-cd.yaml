@@ -36,27 +36,27 @@ jobs:
       working-directory: ./frontend
       run: |
         docker build \
-          -t ${{ env.ECR_REGISTRY }}/firstname-lastname/frontend:latest \
-          -t ${{ env.ECR_REGISTRY }}/firstname-lastname/frontend:${{ github.sha }} \
+          -t ${{ env.ECR_REGISTRY }}/jeremy-opare/frontend:latest \
+          -t ${{ env.ECR_REGISTRY }}/jeremy-opare/frontend:${{ github.sha }} \
           .
 
     - name: Push Frontend Image
       run: |
-        docker push ${{ env.ECR_REGISTRY }}/firstname-lastname/frontend:latest
-        docker push ${{ env.ECR_REGISTRY }}/firstname-lastname/frontend:${{ github.sha }}
+        docker push ${{ env.ECR_REGISTRY }}/jeremy-opare/frontend:latest
+        docker push ${{ env.ECR_REGISTRY }}/jeremy-opare/frontend:${{ github.sha }}
 
     - name: Build Backend Image
       working-directory: ./backend
       run: |
         docker build \
-          -t ${{ env.ECR_REGISTRY }}/firstname-lastname/backend:latest \
-          -t ${{ env.ECR_REGISTRY }}/firstname-lastname/backend:${{ github.sha }} \
+          -t ${{ env.ECR_REGISTRY }}/jeremy-opare/backend:latest \
+          -t ${{ env.ECR_REGISTRY }}/jeremy-opare/backend:${{ github.sha }} \
           .
 
     - name: Push Backend Image
       run: |
-        docker push ${{ env.ECR_REGISTRY }}/firstname-lastname/backend:latest
-        docker push ${{ env.ECR_REGISTRY }}/firstname-lastname/backend:${{ github.sha }}
+        docker push ${{ env.ECR_REGISTRY }}/jeremy-opare/backend:latest
+        docker push ${{ env.ECR_REGISTRY }}/jeremy-opare/backend:${{ github.sha }}
 
     - name: Install kubectl
       uses: azure/setup-kubectl@v3
@@ -65,7 +65,7 @@ jobs:
 
     - name: Configure kubectl for EKS
       run: |
-        aws eks update-kubeconfig --name <EKS_CLUSTER_NAME> --region ${{ env.AWS_REGION }}
+        aws eks update-kubeconfig --name eu-west-1 --region ${{ env.AWS_REGION }}
 
     - name: Deploy to Kubernetes
       run: |
