@@ -1,7 +1,0 @@
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: jeremy-opare
-  labels:
-    name: jeremy-opare
-    project: capstone
