@@ -44,7 +44,7 @@ spec:
           httpGet:
             path: /health
             port: 80
-          initialDelaySeconds: 5
+          initialDelaySeconds: 15
           periodSeconds: 5
           timeoutSeconds: 3
           failureThreshold: 3
@@ -52,4 +52,5 @@ spec:
           runAsNonRoot: true
           runAsUser: 1001
           allowPrivilegeEscalation: false
+
           readOnlyRootFilesystem: false
