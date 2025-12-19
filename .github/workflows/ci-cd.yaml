@@ -65,7 +65,7 @@ jobs:
 
     - name: Configure kubectl for EKS
       run: |
-        aws eks update-kubeconfig --name eu-west-1 --region ${{ env.AWS_REGION }}
+        aws eks update-kubeconfig --name innovation --region ${{ env.AWS_REGION }}
 
     - name: Deploy to Kubernetes
       run: |
